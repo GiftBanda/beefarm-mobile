@@ -33,9 +33,9 @@ export default function TabLayout() {
         }}
       />
        <Tabs.Screen
-        name="market"
+        name="catalog"
         options={{
-          title: 'Market',
+          title: 'Catalog',
           tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name="storefront.fill" color={focused ? '#015115' : color} />,
         }}
       />

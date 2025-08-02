@@ -118,9 +118,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 16,
-       // borderWidth: 1,
+        borderWidth: 1,
         borderColor: '#22c55e',
         borderRadius: 12,
+        backgroundColor: '#fff',
+        padding: 16,
     },
     loadingIndicator: {
         marginVertical: 10,

@@ -1,8 +1,7 @@
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { Header } from '@/components/Header';
 import axios from 'axios';
 import { Image } from 'expo-image';
 import * as Location from 'expo-location';
-import { navigate } from 'expo-router/build/global-state/routing';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -140,66 +139,62 @@ const SprayingAdviceScreen = () => {
 
     return (
         <SafeAreaView>
-            <View style={styles.header}>
-                <Pressable onPress={() => navigate('..')}>
-                    <Text style={{ fontWeight: 'bold', alignItems: 'center' }}><AntDesign name="arrowleft" size={24} color="black" /></Text>
-                </Pressable>
-            </View>
+            <Header title="Spraying Advisor" />
             <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.section}>
-                {
-                    sprayingAdvice && (
-                        <Image
-                            source={{ uri: sprayingAdvice?.details.iconUrl || 'https://example.com/default-icon.png' }}
-                            style={styles.image}
-                        />
-                    )
-                }
-                {
-                    sprayingAdvice ? (
-                        <View>
-                            <Text style={styles.title}>{sprayingAdvice?.details.description}</Text>
-                        </View>
-                    ) : <Text style={styles.title}>Spraying Advisor</Text>
-                }
+                <View style={styles.section}>
+                    {
+                        sprayingAdvice && (
+                            <Image
+                                source={{ uri: sprayingAdvice?.details.iconUrl || 'https://example.com/default-icon.png' }}
+                                style={styles.image}
+                            />
+                        )
+                    }
+                    {
+                        sprayingAdvice ? (
+                            <View>
+                                <Text style={styles.title}>{sprayingAdvice?.details.description}</Text>
+                            </View>
+                        ) : <Text style={styles.title}>Spraying Advisor</Text>
+                    }
 
-                
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter location (e.g., Lusaka) or use current"
-                    value={currentLocationName || location}
-                    onChangeText={text => {
-                        setLocation(text);
-                        setCurrentLocationName(null);
-                        setCurrentLat(null);
-                        setCurrentLon(null);
-                    }}
-                />
-                {/* <Button
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter location (e.g., Lusaka) or use current"
+                        value={currentLocationName || location}
+                        onChangeText={text => {
+                            setLocation(text);
+                            setCurrentLocationName(null);
+                            setCurrentLat(null);
+                            setCurrentLon(null);
+                        }}
+                    />
+                    {/* <Button
                 title="Use Current Location"
                 onPress={handleUseCurrentLocation}
                 disabled={loadingAdvice}
                 color={currentLat !== null ? "#28a745" : "#007bff"}
             /> */}
-                {/* {currentLat !== null && <Text style={styles.locationStatus}>Using: {currentLocationName || `Lat: ${currentLat.toFixed(4)}, Lon: ${currentLon!.toFixed(4)}`}</Text>} */}
+                    {/* {currentLat !== null && <Text style={styles.locationStatus}>Using: {currentLocationName || `Lat: ${currentLat.toFixed(4)}, Lon: ${currentLon!.toFixed(4)}`}</Text>} */}
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter date (YYYY-MM-DD or 'today', 'tomorrow')"
-                    value={date}
-                    onChangeText={setDate}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter date (YYYY-MM-DD or 'today', 'tomorrow')"
+                        value={date}
+                        onChangeText={setDate}
+                    />
 
-                <Pressable style={styles.currentLocationButton} onPress={handleGetAdvice} disabled={loadingAdvice}>
-                    <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>Get Advice</Text>
-                </Pressable>
+                    <Pressable style={styles.currentLocationButton} onPress={handleGetAdvice} disabled={loadingAdvice}>
+                        <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>Get Advice</Text>
+                    </Pressable>
 
-                {loadingAdvice && <View><ActivityIndicator size="large" color="#0000ff" style={styles.loadingIndicator} /></View>}
-                {errorAdvice && <Text style={styles.errorText}>{errorAdvice}</Text>}
+                    {loadingAdvice && <View><ActivityIndicator size="large" color="#0000ff" style={styles.loadingIndicator} /></View>}
+                    {errorAdvice && <Text style={styles.errorText}>{errorAdvice}</Text>}
 
-                
-            </View>
-            {sprayingAdvice && (
+
+                </View>
+                {sprayingAdvice && (
                     <View style={styles.adviceContainer}>
                         <Text style={styles.adviceStatusText}>Status: {sprayingAdvice.status}</Text>
                         <Text style={styles.adviceDetailText}><Text style={{ fontWeight: 'bold' }}>Location</Text>: {sprayingAdvice.location}</Text>
@@ -212,7 +207,7 @@ const SprayingAdviceScreen = () => {
                 )}
 
                 <View style={{ height: 150 }}></View>
-                </ScrollView>
+            </ScrollView>
         </SafeAreaView>
     );
 };

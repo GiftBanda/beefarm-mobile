@@ -26,6 +26,8 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false, headerTitle: 'Beefarm', headerRight: () => <Button label='G' /> }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="spray-advisor" options={{ headerShown: false }}/>
+        <Stack.Screen name="market" options={{ headerShown: false }}/>
+        <Stack.Screen name="treatplant" options={{ headerShown: false }}/>
         <Stack.Screen name="login" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="auto" />
