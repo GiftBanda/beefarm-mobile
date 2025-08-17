@@ -1,6 +1,7 @@
 
 import { useAuth } from '@/context/auth-context';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Link } from 'expo-router';
 import React from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -54,6 +55,10 @@ export const LoginForm = () => {
                 <Text style={{ color: 'white', textAlign: 'center' }}>Press Me</Text>
             </Pressable>
         </View>
+
+        <Link href="/signup" style={{ marginTop: 15, paddingVertical: 15 }}>
+            <Text style={{ textAlign: 'center' }}>Don&apos;t have an account? Sign up</Text>
+        </Link>
         </ScrollView>
         </KeyboardAvoidingView>
     )

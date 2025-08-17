@@ -1,4 +1,6 @@
+import { useAuth } from '@/context/auth-context';
 import axios from 'axios';
+import { Redirect } from 'expo-router';
 import React, { useState } from 'react';
 import { ActivityIndicator, Alert, Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,6 +13,7 @@ const BACKEND_API_URL = 'http://192.168.1.158:3001/api';
 
 // --- Chat Component ---
 const ChatScreen = () => {
+    const { user } = useAuth();
     const [message, setMessage] = useState('');
     const [chatHistory, setChatHistory] = useState<string[]>([]);
     const [loadingChat, setLoadingChat] = useState(false);
@@ -34,6 +37,10 @@ const ChatScreen = () => {
             setLoadingChat(false);
         }
     };
+
+    if (!user) {
+        return <Redirect href="/login" />;
+      }
 
     return (
         <SafeAreaView>

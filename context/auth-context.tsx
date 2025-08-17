@@ -1,4 +1,4 @@
-import { fetchUserFromToken, login } from '@/services/auth.service';
+import { fetchUserFromToken, login, register } from '@/services/auth.service';
 import { ApiResponse } from '@/types/user.types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
@@ -10,6 +10,7 @@ interface AuthContextType {
   isLoading: boolean;
   error: string | null;
   signIn: (email: string, password: string) => Promise<boolean>;
+  signUp: (email: string, password: string, name: string) => Promise<boolean>;
   signOut: () => Promise<void>;
 }
 
@@ -75,6 +76,38 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     checkAuthStatus();
   }, []); // Run once on component mount
 
+  // Function to handle user sign-up
+  const signUp = async (email: string, password: string, name: string): Promise<boolean> => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      // In a real app, you would make an API call to your backend or Firebase Auth:
+      const response = await register(email, password, name);
+
+      const data = await response.data;
+
+      // If sign-up is successful:
+      if (data) {
+        //const userData: User = { id: 'user123', email: email };
+        setUser(data);
+        await AsyncStorage.setItem('userToken', data.token);
+        // await AsyncStorage.setItem('userToken', data.token); // Store token
+        Alert.alert("Success", "Signed up successfully!");
+        return true; // Indicate success
+      } else {
+        setError('Failed to sign up. Please try again.');
+        Alert.alert("Error", "Failed to sign up. Please try again.");
+        return false; // Indicate failure
+      }
+    } catch (e: any) {
+      setError('Failed to sign up. Please try again.');
+      return false; // Indicate failure
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
   // Function to handle user sign-in
   const signIn = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
@@ -92,7 +125,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (data) {
         //const userData: User = { id: 'user123', email: email };
         setUser(data);
-        await AsyncStorage.setItem('userToken', data.data.user.token);
+        await AsyncStorage.setItem('userToken', data.token);
         // await AsyncStorage.setItem('userToken', data.token); // Store token
         Alert.alert("Success", "Signed in successfully!");
         return true; // Indicate success
@@ -138,6 +171,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isLoading,
     error,
     signIn,
+    signUp,
     signOut,
   };
 

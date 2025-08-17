@@ -53,8 +53,6 @@ const TreatPlant = () => {
           }
         }
     
-    
-    
         let result = await ImagePicker.launchImageLibraryAsync({
           allowsEditing: true,
           quality: 1,
@@ -95,7 +93,7 @@ const TreatPlant = () => {
     
       const handleAnalyzePress = async () => {
         if (!imageBase64) {
-          alert("Please select an image first.");
+          Alert.alert("Please select an image first.");
           return;
         }
     
@@ -174,9 +172,7 @@ const TreatPlant = () => {
                       gap: 8
                     }}>
                       <View>
-                        <Text>
                           <TakePicIcon />
-                        </Text>
                         <Text style={{
                           fontSize: 10,
                           fontWeight: '500',
@@ -185,9 +181,7 @@ const TreatPlant = () => {
                       </View>
                       <Text style={{ fontSize: 24, fontWeight: 'bold' }}>+</Text>
                       <View>
-                        <Text>
                           <SmartPhoneIcon />
-                        </Text>
                         <Text style={{
                           fontSize: 10,
                           fontWeight: '500',
@@ -197,9 +191,7 @@ const TreatPlant = () => {
                       </View>
                       <Text style={{ fontSize: 24, fontWeight: 'bold' }}>+</Text>
                       <View>
-                        <Text>
                           <MedicineIcon />
-                        </Text>
                         <Text style={{
                           fontSize: 10,
                           fontWeight: '500',
@@ -241,15 +233,13 @@ const TreatPlant = () => {
                 </View>
         
         
-        
-        
-                {!permission?.granted && (
+                {/* {!permission?.granted && (
                   <Text style={styles.permissionText}>
-                    Media library permission is currently {permission?.status}.
+                    Media library permission is currently {String(permission?.status)}.
                   </Text>
                 )}
         
-                {error && <Text style={styles.errorText}>{error}</Text>}
+                {error && <Text style={styles.errorText}>{String(error)}</Text>} */}
         
                 <View style={{ height: 50 }}></View>
         
@@ -283,21 +273,4 @@ const styles = StyleSheet.create({
   loader: { marginTop: 30 },
   errorText: { marginTop: 20, color: 'red', textAlign: 'center' },
   resetButton: { marginTop: 10, color: 'red', textAlign: 'center', fontSize: 16, fontWeight: 'bold', padding: 10, borderRadius: 8 },
-  card: {
-    backgroundColor: '#547A64',
-    padding: 10,
-    height: 100,
-    borderRadius: 12,
-    width: '50%',
-    //flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    //marginBottom: 16,
-    //width: '100%',
-  },
-  logo: {
-    width: 60,
-    height: 60,
-    resizeMode: 'contain',
-  },
 });

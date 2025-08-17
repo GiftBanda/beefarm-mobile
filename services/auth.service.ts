@@ -1,23 +1,24 @@
-import api from "@/config/axiosInstance"
+import axiosInstance from "@/config/axiosInstance";
 
 export const fetchUserFromToken = (token: string) => {
     // TODO: fetch user from token
-    return api.get(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/user`, {
+    return axiosInstance.get(`/auth/user`, {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
         }
     })
 }
 
 export const login = (email: string, password: string) => {
-    return api.post(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/auth/login`, {
-        email,
+    return axiosInstance.post(`/auth/login`, {
+        email: email.toLowerCase(),
         password
     })
 }
 
 export const register = (email: string, password: string, name: string) => {
-    return api.post(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/auth/signup`, {
+    return axiosInstance.post(`/auth/signup`, {
         email,
         password,
         name

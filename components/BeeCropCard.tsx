@@ -1,4 +1,5 @@
-import { Image, ImageSourcePropType, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Link } from 'expo-router';
+import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 
 interface CropCardProps {
     // Define any props if needed
@@ -33,9 +34,9 @@ export const BeeCropCard = ({ crop }: CropProps) => {
 
                 
             </View>
-            <Pressable style={styles.button}>
+            <Link href="/create-order" style={styles.button}>
                 <Text style={styles.buttonText}>Order</Text>
-            </Pressable>
+            </Link>
         </View>
     );
 }

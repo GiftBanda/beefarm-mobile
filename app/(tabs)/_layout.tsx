@@ -33,9 +33,9 @@ export default function TabLayout() {
         }}
       />
        <Tabs.Screen
-        name="catalog"
+        name="market"
         options={{
-          title: 'Catalog',
+          title: 'Market',
           tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name="storefront.fill" color={focused ? '#015115' : color} />,
         }}
       />
@@ -47,9 +47,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="profile"
         options={{
-          title: 'Explore',
+          title: 'Profile',
           tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name="person.fill" color={focused ? '#015115' : color} />,
         }}
       />

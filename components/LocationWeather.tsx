@@ -106,7 +106,6 @@ export const LocationWeather = () => {
             </Pressable>
             </View>)
             }
-
         </View>
     );
 };

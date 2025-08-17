@@ -1,15 +1,12 @@
 import { BestSellingCrops } from '@/components/BestSellingCrops';
+import { GradientCard } from '@/components/GradientCard';
 import { Image, } from 'expo-image';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Link } from 'expo-router';
 import React from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function ImagePickerExampleTS() {
-  // const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
   return (
     <SafeAreaView>
       <View style={styles.header}>
@@ -20,48 +17,21 @@ export default function ImagePickerExampleTS() {
         <Text style={styles.headerText}>BeeFarms</Text>
       </View>
       <ScrollView contentContainerStyle={styles.container}>
+        <GradientCard
+          title="Order Fresh Produce"
+          description="We supply fresh produce to hotels, lodges,restaurants and supermarkets"
+          image={require('../../assets/images/watermelon.jpg')}
+          btnText="Order Now"
+          link="/catalog"
+        />
 
-        <View style={{ height: 340, marginBottom: 10, paddingHorizontal: 20 }}>
-          <ImageBackground
-            source={require('../../assets/images/watermelon.jpg')}
-            style={styles.background}
-          >
-            <LinearGradient
-              colors={['rgba(0,0,0,0.4)', 'rgba(0,0,0,0.7)']}
-              style={styles.gradient}
-            >
-              <View style={styles.content}>
-                <Image source={require('../../assets/images/farmlogo.png')} style={{ width: 100, height: 100 }} />
-                <Text style={styles.heading}>Order Fresh Produce</Text>
-                <Text style={styles.subheading}>We supply fresh produce to hotels, lodges,restaurants and supermarkets</Text>
-                <Link href="/catalog" style={styles.button}>
-                  <Text style={styles.buttonText}>Order Now</Text>
-                </Link>
-              </View>
-            </LinearGradient>
-          </ImageBackground>
-        </View>
-
-         <View style={{ height: 340, marginBottom: 10, paddingHorizontal: 20 }}>
-          <ImageBackground
-            source={require('../../assets/images/spray.jpg')}
-            style={styles.background}
-          >
-            <LinearGradient
-              colors={['rgba(0,0,0,0.4)', 'rgba(0,0,0,0.7)']}
-              style={styles.gradient}
-            >
-              <View style={styles.content}>
-                <Image source={require('../../assets/images/farmlogo.png')} style={{ width: 100, height: 100 }} />
-                <Text style={styles.heading}>Heal Your Crop</Text>
-                <Text style={styles.subheading}>Try our crop analysis AI to heal your crop</Text>
-                <Link href="/treatplant" style={styles.button}>
-                  <Text style={styles.buttonText}>Try Now</Text>
-                </Link>
-              </View>
-            </LinearGradient>
-          </ImageBackground>
-        </View>
+        <GradientCard
+          title="Heal Your Crop"
+          description="Try our crop analysis AI to heal your crop"
+          image={require('../../assets/images/spray.jpg')}
+          btnText="Try Now"
+          link="/treatplant"
+        />
 
         <BestSellingCrops />
 
@@ -101,61 +71,12 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 12,
     width: '50%',
-    //flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    //marginBottom: 16,
-    //width: '100%',
   },
   logo: {
     width: 60,
     height: 60,
     resizeMode: 'contain',
   },
-   background: {
-        flex: 1,
-        //marginTop: 10,
-        borderRadius: 20,
-        objectFit: 'cover',
-    },
-    gradient: {
-        flex: 1,
-        //borderRadius: 20,
-    },
-    content: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 24,
-    },
-    text: {
-        color: '#fff',
-        fontSize: 22,
-        textAlign: 'center',
-    },
-      heading: {
-        color: '#fff',
-        fontSize: 28,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    subheading: {
-        marginTop: 4,
-        fontSize: 14,
-        color: '#fff',
-        marginBottom: 10,
-        textAlign: 'center',
-    },
-    button: {
-        marginTop: 20,
-        backgroundColor: '#fff',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-    },
-    buttonText: {
-        color: '#000',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
 });

@@ -1,16 +1,22 @@
-// api.ts
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 
-const baseURL = process.env.EXPO_BASE_URL;
+const BACKEND_API_URL = `${process.env.EXPO_PUBLIC_BACKEND_URL}/api`;
 
-const api: AxiosInstance = axios.create({
-  baseURL: baseURL,
-  timeout: 10000,
+const axiosInstance = axios.create({
+  baseURL: BACKEND_API_URL, // Replace with your actual API base URL
+  timeout: 10000, // Optional: Request timeout in milliseconds
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    // Add other default headers as needed, e.g., Authorization tokens
   },
 });
 
-export default api;
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Handle global errors here, e.g., redirect to login on 401
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;
