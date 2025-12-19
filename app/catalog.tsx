@@ -23,7 +23,7 @@ const Catalog = () => {
                             style={styles.gradient}
                         >
                             <View style={styles.content}>
-                                <Image source={require('../assets/images/farmlogo.png')} style={{ width: 100, height: 100 }} />
+                                <Image source={require('../assets/images/logo.png')} style={{ width: 100, height: 100 }} />
                                 <Text style={styles.heading}>Order Fresh Produce</Text>
                                 <Text style={styles.subheading}>We supply fresh produce to hotels, lodges,restaurants and supermarkets</Text>
                             </View>

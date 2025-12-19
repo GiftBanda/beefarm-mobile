@@ -11,7 +11,7 @@ const Login = () => {
         <SafeAreaView>
             <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Image
-                    source={require('@/assets/images/farmlogo.png')}
+                    source={require('@/assets/images/logo.png')}
                     style={styles.image}
                 />
                 <Text style={{ fontSize: 24, fontWeight: 'bold', alignSelf: 'center' }}>

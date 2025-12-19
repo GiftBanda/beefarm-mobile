@@ -23,7 +23,7 @@ export default function RootLayout() {
     <AuthProvider>
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false, headerTitle: 'Beefarm', headerRight: () => <Button label='G' /> }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, headerTitle: 'Agronova', headerRight: () => <Button label='G' /> }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="spray-advisor" options={{ headerShown: false }}/>
         <Stack.Screen name="catalog" options={{ headerShown: false }}/>
@@ -31,6 +31,7 @@ export default function RootLayout() {
         <Stack.Screen name="login" options={{ headerShown: false }} />
         <Stack.Screen name="signup" options={{ headerShown: false }} />
         <Stack.Screen name="create-order" options={{ headerShown: false }} />
+        <Stack.Screen name="field/[id]" options={{ headerShown: true, title: 'Field Details' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

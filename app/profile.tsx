@@ -1,3 +1,4 @@
+import { HelloWave } from '@/components/HelloWave';
 import { useAuth } from '@/context/auth-context';
 import { Redirect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -14,13 +15,13 @@ export default function Profile() {
   return (
     <View style={styles.container}>
         <Image
-          source={require('../../assets/images/farmlogo.png')}
+          source={require('../assets/images/logo.png')}
           style={styles.image}
         />
 
         <View>
           <Text style={{ fontSize: 24, fontWeight: 'bold', alignSelf: 'center' }}>
-            Hey, {user?.data.user.name}!
+            Hey <HelloWave />, {user?.data.user.name}!
           </Text>
           <Text style={{ fontSize: 16, color: '#666', marginBottom: 20 }}>
             Welcome to the Farmers Hub
@@ -52,8 +53,8 @@ const styles = StyleSheet.create({
     marginTop: 100
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 260,
+    height: 170,
     borderRadius: 8,
   },
 });

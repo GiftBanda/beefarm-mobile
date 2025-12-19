@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Beefarm App",
-    "slug": "beefarm-app",
+    "name": "Agronova App",
+    "slug": "agronova-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/farmlogo.png",
-    "scheme": "beefarmapp",
+    "icon": "./assets/images/logo.png",
+    "scheme": "agronovaapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -37,10 +37,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/farmlogo.png",
-          "imageWidth": 200,
+          "image": "./assets/images/logo.png",
+          "imageWidth": 270,
           "contentFit": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#ffffff",
+          "resizeMode": "contain",
+          "shadowColor": "#fff"
         }
       ],
       [

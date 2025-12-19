@@ -21,13 +21,13 @@ export const GradientCard = ({ title, description, image, btnText, link }: Props
                 imageStyle={{ borderRadius: 20 }} // 👈 apply to image itself
             >
                 <LinearGradient
-                    colors={['rgba(0,0,0,0.4)', 'rgba(0,0,0,0.7)']}
+                    colors={['rgba(0,0,0,0.7)', 'rgba(0,0,0,0.7)']}
                     style={styles.gradient}
                 >
                     <View style={styles.content}>
                         <Image
-                            source={require('../assets/images/farmlogo.png')}
-                            style={{ width: 100, height: 100 }}
+                            source={require('../assets/images/logo.png')}
+                            style={{ width: 160, height: 100 }}
                         />
                         <Text style={styles.heading}>{title}</Text>
                         <Text style={styles.subheading}>{description}</Text>

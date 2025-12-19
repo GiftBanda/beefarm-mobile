@@ -21,6 +21,9 @@ const MAPPING = {
   'person.fill': 'person',
   'storefront.fill': 'storefront',
   'message.fill': 'chat',
+  'calendar': 'calendar-today',
+  'list.bullet.clipboard.fill': 'assignment',
+  'leaf': 'eco',
 } as IconMapping;
 
 /**

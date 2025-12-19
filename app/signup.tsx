@@ -11,13 +11,13 @@ const Signup = () => {
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <ScrollView contentContainerStyle={{ backgroundColor: '#fff', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRadius: 12, height: '100%'  }}>
                 <Image
-                    source={require('@/assets/images/farmlogo.png')}
+                    source={require('@/assets/images/logo.png')}
                     style={styles.image}
                 />
                 <Text style={{ fontSize: 18, fontWeight: 'bold', alignSelf: 'center', marginBottom: 10 }}>
                     Join The Best Farmers Community
                 </Text>
-                <Text style={{ fontSize: 16, color: '#666', marginBottom: 10 }}>
+                <Text style={{ fontSize: 16, color: '#667', marginBottom: 10 }}>
                     Please signup to continue
                 </Text>
                 <SignupForm />

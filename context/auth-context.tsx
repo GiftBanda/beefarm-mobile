@@ -116,6 +116,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       // Simulate an API call for sign-in
       await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
 
+      console.log('Signing in with:', email, password);
+
       // In a real app, you would make an API call to your backend or Firebase Auth:
       const response = await login(email, password);
 

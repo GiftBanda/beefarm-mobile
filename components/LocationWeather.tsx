@@ -1,71 +1,14 @@
-import axios from 'axios';
+import { useLocation } from '@/hooks/useLocation';
 import { Image } from 'expo-image';
-import * as Location from 'expo-location'; // <-- IMPORT EXPO-LOCATION
 import { navigate } from 'expo-router/build/global-state/routing';
-import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 
-// IMPORTANT: Replace with your actual backend IP address and port
-const BASE_URL = `${process.env.EXPO_PUBLIC_BACKEND_URL}/api`; // e.g., 'http://192.168.1.100:3000'
-
-// --- WeatherData type (match backend) ---
-interface FrontendWeatherData {
-    location: string;
-    temperature: number;
-    feels_like: number;
-    humidity: number;
-    description: string;
-    wind_speed: number;
-    unit: 'Celsius' | 'Fahrenheit';
-    iconUrl: string;
-}
 
 // --- Location Weather Component ---
 export const LocationWeather = () => {
-    const [weatherData, setWeatherData] = useState<FrontendWeatherData | null>(null);
-    const [loadingWeather, setLoadingWeather] = useState(false);
-    const [errorWeather, setErrorWeather] = useState<string | null>(null);
 
-    const getCurrentLocationAndWeather = async () => {
-        setLoadingWeather(true);
-        setErrorWeather(null);
-        setWeatherData(null);
-
-        // 1. Request Location Permissions
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-            setErrorWeather('Permission to access location was denied.');
-            setLoadingWeather(false);
-            return;
-        }
-
-        try {
-            // 2. Get Current Location
-            // Use high accuracy if needed, but beware of battery drain
-            const location = await Location.getCurrentPositionAsync({
-                accuracy: Location.Accuracy.Balanced, // Or Accuracy.High
-            });
-
-            const { latitude, longitude } = location.coords;
-
-            // 3. Send Location to Backend to Get Weather
-            const response = await axios.post<FrontendWeatherData>(`${BASE_URL}/weather`, {
-                latitude,
-                longitude,
-            });
-            setWeatherData(response.data);
-
-        } catch (error: any) {
-            setErrorWeather(error.response?.data?.error || `Failed to get current weather: ${error.message}`);
-        } finally {
-            setLoadingWeather(false);
-        }
-    };
-
-    useEffect(() => {
-        getCurrentLocationAndWeather();
-    }, []);
-
+    const { weatherData, loadingWeather, errorWeather, getCurrentLocationAndWeather } = useLocation();
+   
     return (
         <View style={styles.section}>
             {loadingWeather && <View><ActivityIndicator size="large" color="#015115" style={styles.loadingIndicator} />
@@ -84,7 +27,7 @@ export const LocationWeather = () => {
                         <Text style={styles.weatherDetail}>Feels like: {weatherData.feels_like}°{weatherData.unit === 'Celsius' ? 'C' : 'F'}</Text>
                     </View>
                     <Image
-                        source={{ uri: weatherData.iconUrl }} // Replace with actual weather icon URL
+                        source={{ uri: weatherData.iconUrl }}
                         style={{ width: 150, height: 100 }}
                     />
                 </View>
@@ -116,7 +59,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 16,
+        marginHorizontal: 16,
+        marginBottom: 16,
         borderWidth: 1,
         borderColor: '#22c55e',
         borderRadius: 12,
@@ -133,11 +77,9 @@ const styles = StyleSheet.create({
     },
     weatherDetail: {
         fontSize: 16,
-        //marginBottom: 3,
         color: '#333',
     },
     link: {
-        //marginBottom: 20,
         marginLeft: 16,
         color: '#fff',
         backgroundColor: '#015115',
@@ -160,7 +102,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     refresh: {
-        //marginBottom: 20,
         marginLeft: 16,
         color: '#015115',
         backgroundColor: '#fff',
