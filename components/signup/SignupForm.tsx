@@ -1,6 +1,7 @@
 
 import { useAuth } from '@/context/auth-context';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Link } from 'expo-router';
 import React from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -14,49 +15,63 @@ export const SignupForm = () => {
 
     return (
         <KeyboardAvoidingView
-            style={{ flex: 1 }}
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.container}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
         >
-            <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                <View style={{ flex: 1, width: '100%', padding: 10, }}>
+            <ScrollView
+                style={styles.scrollView}
+                contentContainerStyle={styles.scrollViewContent}
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode="on-drag"
+            >
+                <View style={styles.formContainer}>
                     <TextInput
-                        style={{ height: 40, borderRadius: 5, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+                        style={styles.textInput}
                         placeholder="Username"
-                        keyboardType='default' // Example of keyboard type
+                        placeholderTextColor="#6B7280"
+                        keyboardType="default"
+                        autoCapitalize="none"
                         value={username}
                         onChangeText={setUsername}
                     />
                     <TextInput
-                        style={{ height: 40, borderRadius: 5, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+                        style={styles.textInput}
                         placeholder="Email"
-                        keyboardType='email-address' // Example of keyboard type
+                        placeholderTextColor="#6B7280"
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        autoCorrect={false}
                         value={email}
                         onChangeText={setEmail}
                     />
-                    <View style={{ flexDirection: 'row', }}>
+                    <View style={styles.passwordRow}>
                         <TextInput
-                            style={{ height: 40, width: '90%', borderRadius: 5, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
-                            placeholder="Enter more text"
-                            secureTextEntry={showPassword} // Example of secure text entry
-                            keyboardType='default' // Example of keyboard type
+                            style={styles.passwordInput}
+                            placeholder="Password"
+                            placeholderTextColor="#6B7280"
+                            secureTextEntry={!showPassword}
+                            keyboardType="default"
                             value={password}
                             onChangeText={setPassword}
                         />
                         <TouchableOpacity
-                            style={{ backgroundColor: '#eee', padding: 10, borderRadius: 5, }}
+                            style={styles.iconButton}
                             onPress={() => setShowPassword(!showPassword)}
                         >
-                            <Text style={{ color: 'white', textAlign: 'center' }}>{showPassword ? <FontAwesome name="eye" size={18} color="#14532D" /> : <FontAwesome name="eye-slash" size={18} color="#14532D" />}</Text>
+                            <Text style={styles.iconButtonText}>
+                                {showPassword ? (
+                                    <FontAwesome name="eye" size={18} color="#14532D" />
+                                ) : (
+                                    <FontAwesome name="eye-slash" size={18} color="#14532D" />
+                                )}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                     <Pressable
                         style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed ? '#ddd' : '#2196F3',
-                                paddingHorizontal: 10,
-                                paddingVertical: 15,
-                                borderRadius: 10,
-                            },
+                            styles.submitButton,
+                            pressed && styles.submitButtonPressed,
                         ]}
                         onPress={() => { 
                             if(!email || !password || !username) {
@@ -66,8 +81,15 @@ export const SignupForm = () => {
                             signUp(email, password, username) 
                         }}
                     >
-                        <Text style={{ color: 'white', textAlign: 'center', fontSize: 16, fontWeight: 'bold' }}>Signup</Text>
+                        <Text style={styles.submitButtonText}>
+                            {
+                                isLoading ? 'Signing Up...' : 'Signup'
+                            }
+                        </Text>
                     </Pressable>
+                    <Link href="/login" style={styles.loginLink}>
+                        <Text style={styles.loginLinkText}>Already have an account? Log in</Text>
+                    </Link>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -78,21 +100,88 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    inner: {
+    scrollView: {
         flex: 1,
-        justifyContent: 'flex-end',  // important to keep TextInput at the bottom
-        padding: 24,
+        width: '100%',
     },
     textInput: {
-        height: 50,
-        borderColor: '#000000',
+        height: 48,
+        borderRadius: 10,
+        borderColor: '#D1D5DB',
         borderWidth: 1,
+        paddingHorizontal: 14,
+        backgroundColor: '#F9FAFB',
+        color: '#111827',
+        fontSize: 15,
+        marginBottom: 12,
+    },
+    passwordRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 48,
+        borderRadius: 10,
+        borderColor: '#D1D5DB',
+        borderWidth: 1,
+        backgroundColor: '#F9FAFB',
+        marginBottom: 12,
         paddingHorizontal: 10,
+    },
+    passwordInput: {
+        flex: 1,
+        height: '100%',
+        paddingHorizontal: 8,
+        backgroundColor: 'transparent',
+        color: '#111827',
+        fontSize: 15,
+    },
+    iconButton: {
+        height: 16,
+        width: 16,
+        borderRadius: 8,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 0,
+        margin: 0,
+    },
+    iconButtonText: {
+        textAlign: 'center',
+        marginLeft: -20,
     },
     scrollViewContent: {
         flexGrow: 1,
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'center',
-        padding: 10,
+        padding: 20,
+    },
+    formContainer: {
+        flex: 1,
+        width: '100%',
+        alignSelf: 'stretch',
+        padding: 20,
+    },
+    submitButton: {
+        backgroundColor: '#2196F3',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        borderRadius: 10,
+    },
+    submitButtonPressed: {
+        backgroundColor: '#1D4ED8',
+    },
+    submitButtonText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    loginLink: {
+        marginTop: 16,
+        paddingVertical: 10,
+    },
+    loginLinkText: {
+        textAlign: 'center',
+        color: '#14532D',
+        fontSize: 14,
     },
 });

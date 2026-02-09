@@ -1,8 +1,9 @@
 import { fetchUserFromToken, login, register } from '@/services/auth.service';
 import { ApiResponse } from '@/types/user.types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { router } from 'expo-router';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Text, View } from 'react-native'; // Using React Native components for UI
+import { Alert } from 'react-native'; // Using React Native components for UI
 // 1. Define types for the user and the authentication context
 
 interface AuthContextType {
@@ -114,7 +115,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setError(null);
     try {
       // Simulate an API call for sign-in
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+      //await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
 
       console.log('Signing in with:', email, password);
 
@@ -130,6 +131,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         await AsyncStorage.setItem('userToken', data.token);
         // await AsyncStorage.setItem('userToken', data.token); // Store token
         Alert.alert("Success", "Signed in successfully!");
+        router.push('/'); // Navigate to home screen after successful login
         return true; // Indicate success
       } else {
         setError('Invalid credentials.');
@@ -178,14 +180,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   // If still loading the initial auth status, show a loading indicator.
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={{ marginTop: 10 }}>Loading authentication...</Text>
-      </View>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  //       <ActivityIndicator size="large" color="#0000ff" />
+  //       <Text style={{ marginTop: 10 }}>Loading authentication...</Text>
+  //     </View>
+  //   );
+  // }
 
   // Once loading is complete, render the children with the context value.
   return (

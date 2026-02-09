@@ -15,6 +15,7 @@ import { useAuth } from '@/context/auth-context';
 import { useTaskCalendar } from '@/hooks/useTaskCalendar';
 import dayjs from 'dayjs';
 import { Link } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Define the shape of the JSON response from the backend
 interface AnalysisResult {
@@ -153,6 +154,7 @@ const HomeDashboard = () => {
     fetchFields();
   }, []);
   return (
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={styles.container}>
 
         <View style={{ margin: 16, backgroundColor: '#fff', borderWidth: 1, borderColor: '#22c55e', padding: 16, borderRadius: 12 }}>
@@ -287,6 +289,7 @@ const HomeDashboard = () => {
         <View style={{ height: 50 }}></View>
 
       </ScrollView>
+      </SafeAreaView>
   )
 }
 

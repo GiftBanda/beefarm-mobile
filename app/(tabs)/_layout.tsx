@@ -31,7 +31,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: '',
-          headerShown: true,
+          headerShown: false,
           headerTitle: () => <Image source={require('@/assets/images/logo.png')} style={{ width: 80, height: 50 }} />,
           tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name="house.fill" color={focused ? '#015115' : color} />,
           headerRight: () => <View style={{ flexDirection: 'row', gap: 16, marginRight: 16 }}>
